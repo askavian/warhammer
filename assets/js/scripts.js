@@ -1,7 +1,8 @@
 console.log("scriptfile loaded"); // Debugging remove befor release
 
 
-// Questions Data
+// Questions Data counts from 0 upwards
+// Event Listener starts question only when DOM is created
 document.addEventListener("DOMContentLoaded", () => {
     const questions = [
       {
@@ -41,10 +42,34 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ];
 
+    // Tracks current question
     let currentQuestionIndex = 0;
+    // Stores Current Score
     let score = 0;
+    // Constant for User Answers
+    const userAnswers = [];
+ 
+    // DOM Elements from HTML 
+    const quizContainer = document.getElementById("quiz-container");
+    const errorMessage = document.getElementById("error-message");
+ 
+    // Start screen function
+    function showStartScreen() {
+      quizContainer.innerHTML = "";
+ 
+      const startMessage = document.createElement("h1");
+      startMessage.textContent = "Welcome to my Warhammer Quiz!";
+      quizContainer.appendChild(startMessage);
+ 
+      const startButton = document.createElement("button");
+      startButton.textContent = "Start Quiz";
+      startButton.addEventListener("click", showQuestion);
+      quizContainer.appendChild(startButton);
+    }
+ 
 
     // Runs Game as soon as page loads
     showStartScreen();
-    console.log(showStartScreen);
+    console.log(showStartScreen);  // remove before release
+
 });
