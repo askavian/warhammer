@@ -124,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Go back to the previous question DEBUGGING
-    /*
     function goBack() {
         // Decrease the current question index
         currentQuestionIndex--;
@@ -133,39 +132,84 @@ document.addEventListener("DOMContentLoaded", () => {
         showQuestion();
       }
        
-      // Validate the selected answer DEBUGGING
-      function validateAnswer() {
-        errorMessage.textContent = "";
-        const selectedAnswer = document.querySelector("input[name='answer']:checked");
+    // Validate the selected answer DEBUGGING
+    function validateAnswer() {
+      errorMessage.textContent = "";
+      const selectedAnswer = document.querySelector("input[name='answer']:checked");
    
-        if (!selectedAnswer) {
-          errorMessage.textContent = "Please select an answer.";
-          return;
-        }
-          
-       
-        // Store the user's selected answer
-        userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
-       
-        // Increment score if the answer is correct
-        if (parseInt(selectedAnswer.value) === questions[currentQuestionIndex].correct) {
-          score++;
-        }
-       
-        // Move to the next question or show the result page
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          showQuestion();
-        } else {
-          showResult();
-        }
+      if (!selectedAnswer) {
+        errorMessage.textContent = "Please select an answer.";
+        return;
       }
-        */
+              
+      // Store the user's selected answer
+      userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+       
+      // Increment score if the answer is correct
+      if (parseInt(selectedAnswer.value) === questions[currentQuestionIndex].correct) {
+        score++;
+      }
+       
+      // Move to the next question or show the result page
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    // Show the result page
+    function showResult() {
+      quizContainer.innerHTML = "";
+   
+      // Display the result message
+      const resultMessage = document.createElement("h2");
+      if (score === questions.length) {
+        resultMessage.textContent = "Congratulations! You answered all questions correctly!";
+        } else {
+          resultMessage.textContent = `You got ${score} out of ${questions.length} correct.`;
+        }
+        quizContainer.appendChild(resultMessage);
+     
+      // Review user answers
+      const answerReview = document.createElement("div");
+      answerReview.innerHTML = "<h3>Your Answers:</h3>";
+     
+      questions.forEach((q, index) => {
+        const reviewItem = document.createElement("p");
+        const userAnswer = q.answers[userAnswers[index]] || "No answer selected";
+     
+        // Display the question and user's answer
+        reviewItem.innerHTML = `<strong>Question ${index + 1}:</strong> ${q.question}<br>
+                                <strong>Your Answer:</strong> ${userAnswer}`;
+        reviewItem.style.color = userAnswers[index] === q.correct ? "green" : "red";
+     
+        answerReview.appendChild(reviewItem);
+      });
+     
+      quizContainer.appendChild(answerReview);
+     
+      // Restart button to reset the quiz
+      const restartButton = document.createElement("button");
+      restartButton.textContent = "Restart Quiz";
+      restartButton.addEventListener("click", restartQuiz);
+      quizContainer.appendChild(restartButton);
+    }
+     
+    // Restart the quiz and reset variables
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      userAnswers.length = 0;
+      errorMessage.textContent = "";
+      showStartScreen();
+      }  
 
  
 
     // Runs Game as soon as page loads
-    // showStartScreen();
-    //console.log(showStartScreen);  // remove before release
+    showStartScreen();
+    console.log(showStartScreen);  // remove before release
 
 );
