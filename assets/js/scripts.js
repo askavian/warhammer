@@ -128,20 +128,31 @@ document.addEventListener("DOMContentLoaded", () => {
   function validateAnswer() {
     errorMessage.textContent = "";
     const selectedAnswer = document.querySelector("input[name='answer']:checked");
-
+ 
+    // Store the user's selected answer
     if (!selectedAnswer) {
       errorMessage.textContent = "Please select an answer.";
       return;
     }
-
-    // Store the user's selected answer
-    userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
-
-    // Increment score if the answer is correct
-    if (parseInt(selectedAnswer.value) === questions[currentQuestionIndex].correct) {
+ 
+    const selectedIndex = parseInt(selectedAnswer.value);
+ 
+    // Check if the previous answer was correct
+    if (userAnswers[currentQuestionIndex] !== undefined) {
+      const previousAnswer = userAnswers[currentQuestionIndex];
+      // prevents counter from previous false answer 
+      if (previousAnswer === questions[currentQuestionIndex].correct && selectedIndex !== previousAnswer) {
+        score--;
+      } else if (previousAnswer !== questions[currentQuestionIndex].correct && selectedIndex === questions[currentQuestionIndex].correct) {
+        score++;
+      }
+    } else if (selectedIndex === questions[currentQuestionIndex].correct) {
       score++;
     }
-
+ 
+    // Store the user's selected answer
+    userAnswers[currentQuestionIndex] = selectedIndex;
+ 
     // Move to the next question or show the result page
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {

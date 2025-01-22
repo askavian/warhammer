@@ -1,1 +1,0 @@
-by Malte M. Boettcher
