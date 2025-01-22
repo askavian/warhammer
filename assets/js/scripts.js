@@ -77,10 +77,56 @@ document.addEventListener("DOMContentLoaded", () => {
       quizContainer.appendChild(questionElement);
     }
 
+      // Render answer as a radio button
+      question.answers.forEach((answer, index) => {
+        const answerContainer = document.createElement("div");
+        answerContainer.classList.add("answer");
+     
+        const radioInput = document.createElement("input");
+        radioInput.type = "radio";
+        radioInput.name = "answer";
+        radioInput.value = index;
+        radioInput.id = `answer-${index}`;
+    
+        // Pre-fill previously selected answer
+        if (userAnswers[currentQuestionIndex] === index) {
+            radioInput.checked = true;
+          }
+           
+            const label = document.createElement("label");
+            label.htmlFor = `answer-${index}`;
+            label.textContent = answer;
+           
+            answerContainer.appendChild(radioInput);
+            answerContainer.appendChild(label);
+            quizContainer.appendChild(answerContainer);
+        });
+
+        // Create a container for navigation buttons
+      const navigationContainer = document.createElement("div");
+      navigationContainer.classList.add("navigation-buttons");
+ 
+      // Back button to move to the previous question
+      if (currentQuestionIndex > 0) {
+        const backButton = document.createElement("button");
+        backButton.textContent = "Back";
+        backButton.addEventListener("click", goBack);
+        navigationContainer.appendChild(backButton);
+      }
+ 
+      // Next button to move to the next question
+      const nextButton = document.createElement("button");
+      nextButton.textContent = "Next";
+      nextButton.addEventListener("click", validateAnswer);
+      navigationContainer.appendChild(nextButton);
+ 
+      quizContainer.appendChild(navigationContainer);
+    }
+
  
 
     // Runs Game as soon as page loads
-    showStartScreen();
-    console.log(showStartScreen);  // remove before release
+    //showStartScreen();
+    //console.log(showStartScreen);  // remove before release
 
-});
+);
