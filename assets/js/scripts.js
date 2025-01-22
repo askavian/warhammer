@@ -123,10 +123,49 @@ document.addEventListener("DOMContentLoaded", () => {
       quizContainer.appendChild(navigationContainer);
     }
 
+    // Go back to the previous question DEBUGGING
+    /*
+    function goBack() {
+        // Decrease the current question index
+        currentQuestionIndex--;
+       
+        // Show the previous question
+        showQuestion();
+      }
+       
+      // Validate the selected answer DEBUGGING
+      function validateAnswer() {
+        errorMessage.textContent = "";
+        const selectedAnswer = document.querySelector("input[name='answer']:checked");
+   
+        if (!selectedAnswer) {
+          errorMessage.textContent = "Please select an answer.";
+          return;
+        }
+          
+       
+        // Store the user's selected answer
+        userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+       
+        // Increment score if the answer is correct
+        if (parseInt(selectedAnswer.value) === questions[currentQuestionIndex].correct) {
+          score++;
+        }
+       
+        // Move to the next question or show the result page
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }
+        */
+
  
 
     // Runs Game as soon as page loads
-    //showStartScreen();
+    // showStartScreen();
     //console.log(showStartScreen);  // remove before release
 
 );
