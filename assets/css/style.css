@@ -9,6 +9,14 @@ body {
 header h1 {
     text-align: center;
   }
+
+h2 {
+    margin-bottom: 20px;
+  }
+  
+h3 {
+    margin-top: 30px;
+  }
  
 .quiz-container {
     width: 90%;

@@ -66,6 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
       startButton.addEventListener("click", showQuestion);
       quizContainer.appendChild(startButton);
     }
+
+    // Dispys a question and ANSWERS MISSING ATM
+    function showQuestion() {
+      quizContainer.innerHTML = "";
+      const question = questions[currentQuestionIndex];
+       
+      const questionElement = document.createElement("h2");
+      questionElement.textContent = question.question;
+      quizContainer.appendChild(questionElement);
+    }
+
  
 
     // Runs Game as soon as page loads
