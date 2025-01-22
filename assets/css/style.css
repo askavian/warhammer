@@ -53,6 +53,7 @@ input {
     font-size: 16px;
     cursor: pointer;
   }
+
   
 .navigation-buttons button:hover {
     background-color: #0056b3;
@@ -74,6 +75,16 @@ button {
     color: white;
     font-size: 16px;
     cursor: pointer;
+  }
+
+
+.navigation-buttons button:first-of-type:not(:last-of-type) {
+    background-color: #f44336;
+    color: white;
+  }
+ 
+ .navigation-buttons button:first-of-type:not(:last-of-type):hover {
+    background-color: #d32f2f;
   }
   
 button:hover {
